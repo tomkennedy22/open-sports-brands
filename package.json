@@ -1,0 +1,10 @@
+{
+    "type": "module",
+    "scripts": {
+    "build:readme": "tsx generateReadme.ts --include logos/,icons/ --limit 60 --title \"SVG Gallery\""
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
