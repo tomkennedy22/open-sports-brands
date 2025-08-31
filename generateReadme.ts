@@ -4,7 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const repoRoot = path.resolve(__dirname, "..");
+const repoRoot = path.resolve(__dirname);
 
 // config — tweak as you like
 const TITLE = "SVG Gallery";
@@ -13,48 +13,48 @@ const PER_FOLDER_LIMIT = 60; // or undefined to show all
 const IMG_WIDTH = 160;       // px
 
 async function listFilesRecursive(dir, ignore = new Set([".git", "node_modules"])) {
-  const out: string[] = [];
-  async function walk(curr) {
-    for (const ent of await fs.readdir(curr, { withFileTypes: true })) {
-      if (ent.isDirectory()) {
-        if (!ignore.has(ent.name)) await walk(path.join(curr, ent.name));
-      } else {
-        out.push(path.join(curr, ent.name));
-      }
+    const out: string[] = [];
+    async function walk(curr) {
+        for (const ent of await fs.readdir(curr, { withFileTypes: true })) {
+            if (ent.isDirectory()) {
+                if (!ignore.has(ent.name)) await walk(path.join(curr, ent.name));
+            } else {
+                out.push(path.join(curr, ent.name));
+            }
+        }
     }
-  }
-  await walk(dir);
-  return out;
+    await walk(dir);
+    return out;
 }
 
 function groupByFolder(files) {
-  const map = new Map();
-  for (const abs of files) {
-    const rel = path.relative(repoRoot, abs).replace("\\", "/");
-    const folder = rel.includes("/") ? rel.split("/").slice(0, -1).join("/") : ".";
-    if (!map.has(folder)) map.set(folder, []);
-    map.get(folder).push(rel);
-  }
-  for (const [k, arr] of map) arr.sort();
-  return new Map([...map.entries()].sort());
+    const map = new Map();
+    for (const abs of files) {
+        const rel = path.relative(repoRoot, abs).replace("\\", "/");
+        const folder = rel.includes("/") ? rel.split("/").slice(0, -1).join("/") : ".";
+        if (!map.has(folder)) map.set(folder, []);
+        map.get(folder).push(rel);
+    }
+    for (const [k, arr] of map) arr.sort();
+    return new Map([...map.entries()].sort());
 }
 
 function matches(folder) {
-  if (!INCLUDE_PREFIXES.length) return true;
-  return INCLUDE_PREFIXES.some(( p:string) => folder.startsWith(p.replace(/^\.?\/*/, "")));
+    if (!INCLUDE_PREFIXES.length) return true;
+    return INCLUDE_PREFIXES.some((p: string) => folder.startsWith(p.replace(/^\.?\/*/, "")));
 }
 
 function section(folder, files) {
-  const shown = Number.isFinite(PER_FOLDER_LIMIT) ? files.slice(0, PER_FOLDER_LIMIT) : files;
-  const thumbs = shown.map(rel => `
+    const shown = Number.isFinite(PER_FOLDER_LIMIT) ? files.slice(0, PER_FOLDER_LIMIT) : files;
+    const thumbs = shown.map(rel => `
     <a href="${rel}" title="${rel}">
       <img src="${rel}" alt="${rel}" width="${IMG_WIDTH}" />
     </a>`).join("\n");
+    console.log("section", { folder, files, shown, thumbs });
+    const note = PER_FOLDER_LIMIT && files.length > PER_FOLDER_LIMIT
+        ? `<p><em>Showing ${shown.length} of ${files.length}</em></p>` : "";
 
-  const note = PER_FOLDER_LIMIT && files.length > PER_FOLDER_LIMIT
-    ? `<p><em>Showing ${shown.length} of ${files.length}</em></p>` : "";
-
-  return `
+    return `
 <details open>
   <summary><strong>${folder}</strong> (${files.length})</summary>
 
@@ -66,19 +66,22 @@ ${thumbs}
 }
 
 (async () => {
-  const all = await listFilesRecursive(repoRoot);
-  const svgs = all.filter(f => f.toLowerCase().endsWith(".svg"));
-  const grouped = groupByFolder(svgs);
+    const all = await listFilesRecursive(repoRoot);
+    const svgs = all.filter(f => f.toLowerCase().endsWith(".svg"));
+    console.log(`Found ${svgs.length} SVG files.`, svgs);
+    const grouped = groupByFolder(svgs);
 
-  const toc: string[] = [];
-  const sections: string[] = [];
-  for (const [folder, files] of grouped) {
-    if (!matches(folder)) continue;
-    toc.push(`- [${folder}](#${folder.replace(/[^a-z0-9]+/gi, "-").toLowerCase()})`);
-    sections.push(section(folder, files));
-  }
+    const toc: string[] = [];
+    const sections: string[] = [];
+    for (const [folder, files] of grouped) {
+        if (!matches(folder)) continue;
+        toc.push(`- [${folder}](#${folder.replace(/[^a-z0-9]+/gi, "-").toLowerCase()})`);
+        sections.push(section(folder, files));
+    }
 
-  const md = `# ${TITLE}
+    console.log('toc, sections', { toc, sections });
+
+    const md = `# ${TITLE}
 
 Total SVGs: **${svgs.length}**
 
@@ -90,6 +93,6 @@ ${toc.join("\n")}
 ${sections.join("\n\n---\n")}
 `;
 
-  await fs.writeFile(path.join(repoRoot, "README.md"), md, "utf8");
-  console.log("README.md generated with inline SVG previews ✅");
+    await fs.writeFile(path.join(repoRoot, "README.md"), md, "utf8");
+    console.log("README.md generated with inline SVG previews ✅");
 })().catch(e => { console.error(e); process.exit(1); });
