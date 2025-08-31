@@ -44,24 +44,24 @@ function matches(folder) {
     return INCLUDE_PREFIXES.some((p: string) => folder.startsWith(p.replace(/^\.?\/*/, "")));
 }
 
+function escapePath(p) {
+    return encodeURI(p); // handles spaces etc.
+}
+
 function section(folder, files) {
-    const shown = Number.isFinite(PER_FOLDER_LIMIT) ? files.slice(0, PER_FOLDER_LIMIT) : files;
-    const thumbs = shown.map(rel => `
-    <a href="${rel}" title="${rel}">
-      <img src="${rel}" alt="${rel}" width="${IMG_WIDTH}" />
-    </a>`).join("\n");
-    console.log("section", { folder, files, shown, thumbs });
-    const note = PER_FOLDER_LIMIT && files.length > PER_FOLDER_LIMIT
-        ? `<p><em>Showing ${shown.length} of ${files.length}</em></p>` : "";
+    const shown = files.slice(0, 999);
+    const thumbs = shown
+        .map(rel => `<a href="${escapePath(rel)}" title="${rel}"><img src="${escapePath(rel)}" alt="${rel}" width="160" /></a>`)
+        .join("\n"); // NO leading spaces on each line!
 
     return `
 <details open>
-  <summary><strong>${folder}</strong> (${files.length})</summary>
+<summary><strong>${folder}</strong> (${files.length})</summary>
 
-  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;">
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;">
 ${thumbs}
-  </div>
-  ${note}
+</div>
+
 </details>`;
 }
 
@@ -81,7 +81,7 @@ ${thumbs}
 
     console.log('toc, sections', { toc, sections });
 
-    const md = `# ${TITLE}
+    const rawMd = `# ${TITLE}
 
 Total SVGs: **${svgs.length}**
 
@@ -92,6 +92,8 @@ ${toc.join("\n")}
 
 ${sections.join("\n\n---\n")}
 `;
+
+    const md = rawMd.replace(/^\s{4,}(<\/?a\b.*|<\/?img\b.*)>/gm, "$1");
 
     await fs.writeFile(path.join(repoRoot, "README.md"), md, "utf8");
     console.log("README.md generated with inline SVG previews ✅");
