@@ -26,7 +26,6 @@ function recolorSvg(
 }
 
 function App() {
-  const [count, setCount] = useState(0);
   const [hsva1, setHsva1] = useState({ h: 0, s: 0, v: 68, a: 1 });
   const [hsva2, setHsva2] = useState({ h: 0, s: 0, v: 68, a: 1 });
   const [overrideColor1, setOverrideColor1] = useState(false);
@@ -36,23 +35,6 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noopener">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noopener">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button type="button" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
       <div className="flex gap-8 my-8">
         <div>
           <Switch defaultSelected={false} isSelected={overrideColor1} onValueChange={setOverrideColor1} >
@@ -85,7 +67,7 @@ function App() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-scroll">
         {svgList.map((svg) => (
           <div
             key={svg.name}
