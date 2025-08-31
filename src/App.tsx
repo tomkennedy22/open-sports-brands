@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import viteLogo from "/vite.svg";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { svgComponents } from "./svgs";
+import { Button } from "@heroui/react";
+import Colorful from '@uiw/react-color-colorful';
+import { svgList } from "./svgs";
 
 function App() {
   const [count, setCount] = useState(0);
-
+  const [hsva, setHsva] = useState({ h: 0, s: 0, v: 68, a: 1 });
 
   return (
     <>
@@ -20,11 +22,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button
-          type="button"
-          onClick={() => setCount((count) => count + 1)}>
+        <Button type="button" onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
@@ -32,28 +32,26 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      {/* <div>
-        {Object.values(svgComponents).map((src, index) => {
-          console.log("Rendering SVG component:", src);
-          return (
-            <img
-              src={src}
-              key={`hello-${index}`}
-              width={100}
-              height={100}
-              style={{ margin: 10 }}
-              aria-label="SVG icon"
-            />
-          );
-        })}
-      </div> */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <Colorful
+        color={hsva}
+        disableAlpha={true}
+        onChange={(color) => {
+          setHsva(color.hsva);
+        }}
+      />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {svgList.map((svg) => (
-          <SVGRenderer
+          <div
             key={svg.name}
-            svgName={svg.name}
-            content={svgContents[svg.name]}
-          />
+            className="border rounded-md p-4 flex flex-col items-center bg-slate-300"
+          >
+            <div
+              className="mb-2 "
+              dangerouslySetInnerHTML={{ __html: svg.content }}
+              style={{ width: 200, height: 200 }}
+            />
+            <div className="text-center break-all">{svg.name}</div>
+          </div>
         ))}
       </div>
     </>
