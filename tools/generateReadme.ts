@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { optimize } from "svgo";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname);
@@ -61,7 +62,13 @@ const writeSvgFile = async (svgs: string[]) => {
         return {
             name,
             path: svgPath,
-            content: fileContent,
+            content: optimize(fileContent, {
+                multipass: true,
+                plugins: [
+                    "convertStyleToAttrs",
+                    "preset-default",
+                ],
+            }).data,
         }
     })
 
