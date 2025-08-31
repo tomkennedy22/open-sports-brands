@@ -13,7 +13,6 @@ Total SVGs: **29**
 <a href="svgs/a%20bear.svg" title="svgs/a bear.svg"><img src="svgs/a%20bear.svg" alt="svgs/a bear.svg" width="160" /></a>
 <a href="svgs/b.svg" title="svgs/b.svg"><img src="svgs/b.svg" alt="svgs/b.svg" width="160" /></a>
 <a href="svgs/bat.svg" title="svgs/bat.svg"><img src="svgs/bat.svg" alt="svgs/bat.svg" width="160" /></a>
-<a href="svgs/blue%20hawk.svg" title="svgs/blue hawk.svg"><img src="svgs/blue%20hawk.svg" alt="svgs/blue hawk.svg" width="160" /></a>
 <a href="svgs/bull%20bison.svg" title="svgs/bull bison.svg"><img src="svgs/bull%20bison.svg" alt="svgs/bull bison.svg" width="160" /></a>
 <a href="svgs/clover.svg" title="svgs/clover.svg"><img src="svgs/clover.svg" alt="svgs/clover.svg" width="160" /></a>
 <a href="svgs/d%20tiger.svg" title="svgs/d tiger.svg"><img src="svgs/d%20tiger.svg" alt="svgs/d tiger.svg" width="160" /></a>
@@ -22,6 +21,8 @@ Total SVGs: **29**
 <a href="svgs/dragon%202.svg" title="svgs/dragon 2.svg"><img src="svgs/dragon%202.svg" alt="svgs/dragon 2.svg" width="160" /></a>
 <a href="svgs/elephant.svg" title="svgs/elephant.svg"><img src="svgs/elephant.svg" alt="svgs/elephant.svg" width="160" /></a>
 <a href="svgs/f%20wave.svg" title="svgs/f wave.svg"><img src="svgs/f%20wave.svg" alt="svgs/f wave.svg" width="160" /></a>
+<a href="svgs/hawk%201.svg" title="svgs/hawk 1.svg"><img src="svgs/hawk%201.svg" alt="svgs/hawk 1.svg" width="160" /></a>
+<a href="svgs/hawk%202.svg" title="svgs/hawk 2.svg"><img src="svgs/hawk%202.svg" alt="svgs/hawk 2.svg" width="160" /></a>
 <a href="svgs/jaguar.svg" title="svgs/jaguar.svg"><img src="svgs/jaguar.svg" alt="svgs/jaguar.svg" width="160" /></a>
 <a href="svgs/jersey.svg" title="svgs/jersey.svg"><img src="svgs/jersey.svg" alt="svgs/jersey.svg" width="160" /></a>
 <a href="svgs/k.svg" title="svgs/k.svg"><img src="svgs/k.svg" alt="svgs/k.svg" width="160" /></a>
@@ -32,7 +33,6 @@ Total SVGs: **29**
 <a href="svgs/oak%20WIP.svg" title="svgs/oak WIP.svg"><img src="svgs/oak%20WIP.svg" alt="svgs/oak WIP.svg" width="160" /></a>
 <a href="svgs/pioneer.svg" title="svgs/pioneer.svg"><img src="svgs/pioneer.svg" alt="svgs/pioneer.svg" width="160" /></a>
 <a href="svgs/ranchhand.svg" title="svgs/ranchhand.svg"><img src="svgs/ranchhand.svg" alt="svgs/ranchhand.svg" width="160" /></a>
-<a href="svgs/redhawk.svg" title="svgs/redhawk.svg"><img src="svgs/redhawk.svg" alt="svgs/redhawk.svg" width="160" /></a>
 <a href="svgs/spartan%202.svg" title="svgs/spartan 2.svg"><img src="svgs/spartan%202.svg" alt="svgs/spartan 2.svg" width="160" /></a>
 <a href="svgs/terrier.svg" title="svgs/terrier.svg"><img src="svgs/terrier.svg" alt="svgs/terrier.svg" width="160" /></a>
 <a href="svgs/tiger%20g.svg" title="svgs/tiger g.svg"><img src="svgs/tiger%20g.svg" alt="svgs/tiger g.svg" width="160" /></a>

@@ -8,6 +8,7 @@ import { svgList } from "./svgs";
 type ColorMap = {
   "color-1"?: string | false;
   "color-2"?: string | false;
+  "color-3"?: string | false;
 }
 
 function recolorSvg(
@@ -31,11 +32,13 @@ function recolorSvg(
 function App() {
   const [hsva1, setHsva1] = useState({ h: 0, s: 0, v: 68, a: 1 });
   const [hsva2, setHsva2] = useState({ h: 0, s: 0, v: 68, a: 1 });
+  const [hsva3, setHsva3] = useState({ h: 0, s: 0, v: 68, a: 1 });
   const [overrideColor1, setOverrideColor1] = useState(false);
   const [overrideColor2, setOverrideColor2] = useState(false);
-  const [iconSize, setIconSize] = useState(200);
+  const [overrideColor3, setOverrideColor3] = useState(false);
+  const [iconSize, setIconSize] = useState(150);
 
-  const colorMap = { "color-1": overrideColor1 && hsvaToHex(hsva1), "color-2": overrideColor2 && hsvaToHex(hsva2) };
+  const colorMap = { "color-1": overrideColor1 && hsvaToHex(hsva1), "color-2": overrideColor2 && hsvaToHex(hsva2), "color-3": overrideColor3 && hsvaToHex(hsva3) };
 
   return (
     <div className="flex flex-col h-screen px-8 items-center">
@@ -71,6 +74,21 @@ function App() {
           />
         </div>
         <div>
+          <Switch defaultSelected={false} isSelected={overrideColor3} onValueChange={setOverrideColor3} >
+            Override Color 3
+          </Switch>
+          <Chrome
+            color={hsva3}
+            showAlpha={false}
+            inputType={ChromeInputType.HEXA}
+            showEyeDropper={true}
+            showTriangle={false}
+            onChange={(color) => {
+              setHsva3(color.hsva);
+            }}
+          />
+        </div>
+        <div>
           <Slider className="max-w-md"
             orientation="vertical"
             defaultValue={iconSize}
@@ -79,7 +97,7 @@ function App() {
             label="Icon Size"
             maxValue={400}
             minValue={50}
-            step={1} />
+            step={10} />
         </div>
       </div>
       <div className="flex flex-wrap gap-4 overflow-y-scroll justify-center">
@@ -97,7 +115,7 @@ function App() {
             >
               <div className="absolute inset-0 grid place-items-center p-2">
                 <div
-                  className="max-w-full max-h-full *:max-w-full *:max-h-full"
+                  className="max-w-full max-h-full *:max-w-full *:max-h-full content-center place-items-center"
                   style={{ width: iconSize, height: iconSize }}
                   dangerouslySetInnerHTML={{ __html: recolorSvg(svg.content, colorMap) }}
                 />
