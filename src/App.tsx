@@ -5,6 +5,8 @@ import { hexToHsva, hsvaToHex } from "@uiw/color-convert";
 import Chrome, { ChromeInputType } from "@uiw/react-color-chrome";
 import { svgList } from "./svgs";
 
+type SVGObject = typeof svgList[number];
+
 type ColorMap = {
   "color-1"?: string | false;
   "color-2"?: string | false;
@@ -26,6 +28,32 @@ function recolorSvg(svgString: string, colorMap: ColorMap): string {
   return new XMLSerializer().serializeToString(doc.documentElement);
 }
 
+const SvgDisplay = ({ svg, iconSize, colorMap }: { svg: SVGObject, iconSize: number, colorMap: ColorMap }) => {
+  return (<div
+    key={svg.name}
+    className="border rounded-md p-4 flex flex-col items-center bg-slate-300"
+  >
+    <div
+      className="relative aspect-square overflow-hidden rounded-md bg-white/40"
+      style={{
+        width: `calc(${iconSize}px + 16px)`, // iconSize + padding
+        height: `calc(${iconSize}px + 16px)`, // iconSize + padding
+      }}
+    >
+      <div className="absolute inset-0 grid place-items-center p-2">
+        <div
+          className="max-w-full max-h-full *:max-w-full *:max-h-full content-center place-items-center"
+          style={{ width: iconSize, height: iconSize }}
+          dangerouslySetInnerHTML={{
+            __html: recolorSvg(svg.content, colorMap),
+          }}
+        />
+      </div>
+    </div>
+    <div className="mt-2 text-center break-all">{svg.name}</div>
+  </div>)
+}
+
 function App() {
   const [hsva1, setHsva1] = useState(hexToHsva("#FF0000"));
   const [hsva2, setHsva2] = useState(hexToHsva("#00FF00"));
@@ -42,8 +70,8 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen px-8 items-center">
-      <div className="flex gap-8 my-8 flex-shrink-0">
+    <div className="flex h-screen px-8">
+      <div className="flex flex-col gap-4 overflow-y-scroll">
         <div>
           <Switch
             defaultSelected={false}
@@ -115,32 +143,8 @@ function App() {
           />
         </div>
       </div>
-      <div className="flex flex-wrap gap-4 overflow-y-scroll justify-center">
-        {svgList.map((svg) => (
-          <div
-            key={svg.name}
-            className="border rounded-md p-4 flex flex-col items-center bg-slate-300"
-          >
-            <div
-              className="relative aspect-square overflow-hidden rounded-md bg-white/40"
-              style={{
-                width: `calc(${iconSize}px + 16px)`, // iconSize + padding
-                height: `calc(${iconSize}px + 16px)`, // iconSize + padding
-              }}
-            >
-              <div className="absolute inset-0 grid place-items-center p-2">
-                <div
-                  className="max-w-full max-h-full *:max-w-full *:max-h-full content-center place-items-center"
-                  style={{ width: iconSize, height: iconSize }}
-                  dangerouslySetInnerHTML={{
-                    __html: recolorSvg(svg.content, colorMap),
-                  }}
-                />
-              </div>
-            </div>
-            <div className="mt-2 text-center break-all">{svg.name}</div>
-          </div>
-        ))}
+      <div className="flex flex-wrap gap-4 overflow-y-scroll">
+        {svgList.map((svg) => <SvgDisplay key={svg.name} svg={svg} iconSize={iconSize} colorMap={colorMap} />)}
       </div>
     </div>
   );
