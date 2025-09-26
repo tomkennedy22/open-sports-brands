@@ -11,6 +11,7 @@ type ColorMap = {
   "color-1"?: string | false;
   "color-2"?: string | false;
   "color-3"?: string | false;
+  "color-4"?: string | false;
 };
 
 function recolorSvg(svgString: string, colorMap: ColorMap): string {
@@ -28,11 +29,25 @@ function recolorSvg(svgString: string, colorMap: ColorMap): string {
   return new XMLSerializer().serializeToString(doc.documentElement);
 }
 
+const svgHasDataColor = (svg: SVGObject): boolean => {
+  return svg.content.includes('data-color');
+}
+
 const SvgDisplay = ({ svg, iconSize, colorMap }: { svg: SVGObject, iconSize: number, colorMap: ColorMap }) => {
+
+  const hasDataColor = svgHasDataColor(svg)
+
   return (<div
     key={svg.name}
     className="border rounded-md p-4 flex flex-col items-center bg-slate-300"
   >
+    {!hasDataColor && (
+      <div className="text-red-600">
+        <div>
+          <strong>No data color</strong>
+        </div>
+      </div>
+    )}
     <div
       className="relative aspect-square overflow-hidden rounded-md bg-white/40"
       style={{
@@ -58,20 +73,27 @@ function App() {
   const [hsva1, setHsva1] = useState(hexToHsva("#FF0000"));
   const [hsva2, setHsva2] = useState(hexToHsva("#00FF00"));
   const [hsva3, setHsva3] = useState(hexToHsva("#0000FF"));
+  const [hsva4, setHsva4] = useState(hexToHsva("#FF0"));
   const [overrideColor1, setOverrideColor1] = useState(false);
   const [overrideColor2, setOverrideColor2] = useState(false);
   const [overrideColor3, setOverrideColor3] = useState(false);
+  const [overrideColor4, setOverrideColor4] = useState(false);
   const [iconSize, setIconSize] = useState(150);
 
   const colorMap = {
     "color-1": overrideColor1 && hsvaToHex(hsva1),
     "color-2": overrideColor2 && hsvaToHex(hsva2),
     "color-3": overrideColor3 && hsvaToHex(hsva3),
+    "color-4": overrideColor4 && hsvaToHex(hsva4),
   };
+
+  const numSvgs = svgList.length;
+  const numSvgsWithDataColor = svgList.filter(svgHasDataColor).length;
+  const numSvgsMissingDataColor = numSvgs - numSvgsWithDataColor;
 
   return (
     <div className="flex h-screen px-8">
-      <div className="flex flex-col gap-4 overflow-y-scroll">
+      <div className="flex flex-col gap-4 overflow-y-scroll min-w-80">
         <div>
           <Switch
             defaultSelected={false}
@@ -130,6 +152,25 @@ function App() {
           />
         </div>
         <div>
+          <Switch
+            defaultSelected={false}
+            isSelected={overrideColor4}
+            onValueChange={setOverrideColor4}
+          >
+            Override Color 4
+          </Switch>
+          <Chrome
+            color={hsva4}
+            showAlpha={false}
+            inputType={ChromeInputType.HEXA}
+            showEyeDropper={true}
+            showTriangle={false}
+            onChange={(color) => {
+              setHsva4(color.hsva);
+            }}
+          />
+        </div>
+        <div>
           <Slider
             className="max-w-md"
             orientation="vertical"
@@ -143,8 +184,11 @@ function App() {
           />
         </div>
       </div>
-      <div className="flex flex-wrap gap-4 overflow-y-scroll">
-        {svgList.map((svg) => <SvgDisplay key={svg.name} svg={svg} iconSize={iconSize} colorMap={colorMap} />)}
+      <div>
+        <div>{numSvgs} total logos, {numSvgsMissingDataColor} missing data color</div>
+        <div className="flex flex-wrap gap-4 overflow-y-scroll">
+          {svgList.map((svg) => <SvgDisplay key={svg.name} svg={svg} iconSize={iconSize} colorMap={colorMap} />)}
+        </div>
       </div>
     </div>
   );
