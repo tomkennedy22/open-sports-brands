@@ -1,39 +1,15 @@
 {
 	"name": "open-sports-brands",
-	"private": true,
-	"version": "0.0.0",
+	"private": false,
+	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "tsc -b && vite build",
-		"lint": "eslint .",
-		"preview": "vite preview"
+		"process": "node tools/processSvgs.ts"
 	},
 	"dependencies": {
-		"@heroui/react": "^2.8.2",
-		"@tailwindcss/vite": "^4.1.12",
-		"@uiw/react-color-chrome": "^2.8.0",
-		"@uiw/react-color-colorful": "^2.8.0",
-		"chokidar": "^4.0.3",
-		"framer-motion": "^12.23.12",
-		"react": "^19.1.1",
-		"react-dom": "^19.1.1",
-		"svgo": "^4.0.0",
-		"tailwindcss": "^4.1.12",
-		"vite-plugin-svgr": "^4.5.0"
+		"svgo": "latest"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.2",
-		"@eslint/js": "^9.33.0",
-		"@types/react": "^19.1.10",
-		"@types/react-dom": "^19.1.7",
-		"@vitejs/plugin-react": "^5.0.0",
-		"eslint": "^9.33.0",
-		"eslint-plugin-react-hooks": "^5.2.0",
-		"eslint-plugin-react-refresh": "^0.4.20",
-		"globals": "^16.3.0",
-		"typescript": "~5.8.3",
-		"typescript-eslint": "^8.39.1",
-		"vite": "^7.1.2"
+		"@types/node": "^24.5.2"
 	}
 }
