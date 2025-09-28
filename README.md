@@ -13,9 +13,9 @@ Total SVGs: **129**
 <a href="svgs/animal%20-%20badger.svg" title="svgs/animal - badger.svg"><img src="svgs/animal%20-%20badger.svg" alt="svgs/animal - badger.svg" width="160" /></a>
 <a href="svgs/animal%20-%20beaver%20retro%202.svg" title="svgs/animal - beaver retro 2.svg"><img src="svgs/animal%20-%20beaver%20retro%202.svg" alt="svgs/animal - beaver retro 2.svg" width="160" /></a>
 <a href="svgs/animal%20-%20beaver%20retro.svg" title="svgs/animal - beaver retro.svg"><img src="svgs/animal%20-%20beaver%20retro.svg" alt="svgs/animal - beaver retro.svg" width="160" /></a>
+<a href="svgs/animal%20-%20bee%201.svg" title="svgs/animal - bee 1.svg"><img src="svgs/animal%20-%20bee%201.svg" alt="svgs/animal - bee 1.svg" width="160" /></a>
+<a href="svgs/animal%20-%20bee%202.svg" title="svgs/animal - bee 2.svg"><img src="svgs/animal%20-%20bee%202.svg" alt="svgs/animal - bee 2.svg" width="160" /></a>
 <a href="svgs/animal%20-%20bee%20retro.svg" title="svgs/animal - bee retro.svg"><img src="svgs/animal%20-%20bee%20retro.svg" alt="svgs/animal - bee retro.svg" width="160" /></a>
-<a href="svgs/animal%20-%20bee%20yellow%20jacket.svg" title="svgs/animal - bee yellow jacket.svg"><img src="svgs/animal%20-%20bee%20yellow%20jacket.svg" alt="svgs/animal - bee yellow jacket.svg" width="160" /></a>
-<a href="svgs/animal%20-%20bee.svg" title="svgs/animal - bee.svg"><img src="svgs/animal%20-%20bee.svg" alt="svgs/animal - bee.svg" width="160" /></a>
 <a href="svgs/animal%20-%20bison.svg" title="svgs/animal - bison.svg"><img src="svgs/animal%20-%20bison.svg" alt="svgs/animal - bison.svg" width="160" /></a>
 <a href="svgs/animal%20-%20black%20bear.svg" title="svgs/animal - black bear.svg"><img src="svgs/animal%20-%20black%20bear.svg" alt="svgs/animal - black bear.svg" width="160" /></a>
 <a href="svgs/animal%20-%20bruin.svg" title="svgs/animal - bruin.svg"><img src="svgs/animal%20-%20bruin.svg" alt="svgs/animal - bruin.svg" width="160" /></a>
