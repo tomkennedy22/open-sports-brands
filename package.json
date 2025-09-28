@@ -11,5 +11,10 @@
 	},
 	"devDependencies": {
 		"@types/node": "^24.5.2"
-	}
+	},
+	"exports": {
+    ".": {
+      "import": "./svgs.ts"
+    }
+  }
 }
