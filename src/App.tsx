@@ -49,7 +49,7 @@ const SvgDisplay = ({ svg, iconSize, colorMap }: { svg: SVGObject, iconSize: num
       </div>
     )}
     <div
-      className="relative aspect-square overflow-hidden rounded-md bg-white/40"
+      className="relative aspect-square overflow-hidden rounded-md bg-white/40 hover:cursor-pointer hover:scale-110"
       style={{
         width: `calc(${iconSize}px + 16px)`, // iconSize + padding
         height: `calc(${iconSize}px + 16px)`, // iconSize + padding
