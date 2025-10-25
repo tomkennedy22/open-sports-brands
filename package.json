@@ -10,11 +10,12 @@
 		"svgo": "latest"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "2.3.0",
 		"@types/node": "^24.5.2"
 	},
 	"exports": {
-    ".": {
-      "import": "./svgs.ts"
-    }
-  }
+		".": {
+			"import": "./svgs.ts"
+		}
+	}
 }
